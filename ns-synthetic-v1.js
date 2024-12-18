@@ -1,5 +1,5 @@
 
-const runSyntheticMonitor = async ($browser,logger, $util,  DefaultTimeout, ExtraTimeout, SITE_URL, SITE_CODE) => {
+export const runSyntheticMonitor = async ($browser,logger, document, $util,  DefaultTimeout, ExtraTimeout, SITE_URL, SITE_CODE) => {
 // custom metadata for filtering out traffic in analytics
 const INTERNAL_COOKIE = "is_hearst_cc_internal";
 // hiding newsletter modal
@@ -62,8 +62,8 @@ const OOS_TEXTS_SELECTOR = 'p[data-fs-text-stock="true"]';
         `journey-${SITE_CODE}-store`
       );
       await $browser.executeScript(() => {
-        const elements = await $browser.findElements(
-            $driver.By.css('[data-testid="data-fs-button-dropdown-link"][data-fs-button-dropdown-link-highlight="false"]')
+        const elements = document.querySelectorAll(
+          '[data-testid="data-fs-button-dropdown-link"][data-fs-button-dropdown-link-highlight="false"]'
         );
         if (elements.length > 1) {
           elements[1].click();
@@ -85,8 +85,8 @@ const OOS_TEXTS_SELECTOR = 'p[data-fs-text-stock="true"]';
         `journey-${SITE_CODE}-store`
       );
       await $browser.executeScript(() => {
-        const elements = await $browser.findElements(
-            $driver.By.css('[data-testid="product-link"]')
+        const elements = document.querySelectorAll(
+          '[data-testid="product-link"]'
         );
         if (elements.length > 1) {
           const selectedEl =
@@ -107,28 +107,26 @@ const OOS_TEXTS_SELECTOR = 'p[data-fs-text-stock="true"]';
     }
 
     // Check if product is OOS
-try {
-    // Find the element and check if it is "Out of Stock"
-    const isOOS = await $browser.executeScript(async (selector) => {
-        const element = await $browser.findElement($driver.By.css(selector)); // Use await for findElement
-        const text = await element.getText(); // Get the text content
-        return text.trim() === "Out of Stock"; // Check if it matches "Out of Stock"
-    }, OOS_TEXTS_SELECTOR);
+    try {
+      const isOOS = await $browser.executeScript((selector) => {
+        const element = document.querySelector(selector);
+        return element && element.innerText.trim() === "Out of Stock";
+      }, OOS_TEXTS_SELECTOR);
 
-    if (isOOS) {
+      if (isOOS) {
         logger.log(
-            "info",
-            "SKU OOS found - ending test successfully",
-            `journey-${SITE_CODE}-store`
+          "info",
+          "SKU OOS found - ending test successfully",
+          `journey-${SITE_CODE}-store`
         );
         $util.insights.set("monitorOutcome", "SUCCESS");
         logger.endTestCase(`journey-${SITE_CODE}-store`);
         return;
+      }
+    } catch (err) {
+      $util.insights.set("severity", "P3");
+      throw new Error(`Error checking OOS status`);
     }
-} catch (err) {
-    $util.insights.set("severity", "P3");
-    throw new Error(`Error checking OOS status: ${err.message}`);
-}
 
     // Click Increment Quantity Button
     try {
@@ -227,8 +225,6 @@ try {
     logger.endTestCase(`journey-${SITE_CODE}-store`);
   } catch (error) {
     logger.error(error, `journey-${SITE_CODE}-store`);
-    throw new Error(error);
+    throw error;
   }
 }
-
-module.exports = { runSyntheticMonitor };
