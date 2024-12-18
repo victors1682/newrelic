@@ -1,4 +1,3 @@
-$browser.addHeader("x-no-ads", "yes");
 
 export const runSyntheticMonitor = async ($browser, DefaultTimeout, ExtraTimeout, SITE_URL, SITE_CODE) => {
 // custom metadata for filtering out traffic in analytics
