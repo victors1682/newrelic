@@ -135,7 +135,7 @@ const OOS_TEXTS_SELECTOR = 'p[data-fs-text-stock="true"]';
         "Click Increment Quantity Button",
         `journey-${SITE_CODE}-store`
       );
-      const incrementButton = document.getElementBy('[aria-label="Increment Quantity"]');
+      const incrementButton = document.querySelector('[aria-label="Increment Quantity"]');
       logger.log(
         4,
         `incrementButtonincrementButtonn ${incrementButton}`, 
