@@ -1,5 +1,5 @@
 
-exports.runSyntheticMonitor = async ($browser,logger,document, $util,  DefaultTimeout, ExtraTimeout, SITE_URL, SITE_CODE) => {
+module.exports.runSyntheticMonitor = async ($browser,logger,document, $util,  DefaultTimeout, ExtraTimeout, SITE_URL, SITE_CODE) => {
 // custom metadata for filtering out traffic in analytics
 const INTERNAL_COOKIE = "is_hearst_cc_internal";
 // hiding newsletter modal
