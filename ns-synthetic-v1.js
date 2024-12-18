@@ -135,12 +135,9 @@ const OOS_TEXTS_SELECTOR = 'p[data-fs-text-stock="true"]';
         "Click Increment Quantity Button",
         `journey-${SITE_CODE}-store`
       );
-      const incrementButton = await $browser.waitForAndFindElement(
-        By.css('[aria-label="Increment Quantity"]'),
-        DefaultTimeout
-      );
+      const incrementButton = document.getElementBy('[aria-label="Increment Quantity"]');
       logger.log(
-        5,
+        4,
         `incrementButtonincrementButtonn ${incrementButton}`, 
       );
       console.log("incrementButtonincrementButtonincrementButton", incrementButton)
