@@ -1,5 +1,5 @@
 
-module.exports.runSyntheticMonitor = async ($browser,logger,document, $util,  DefaultTimeout, ExtraTimeout, SITE_URL, SITE_CODE) => {
+const runSyntheticMonitor = async ($browser,logger,document, $util,  DefaultTimeout, ExtraTimeout, SITE_URL, SITE_CODE) => {
 // custom metadata for filtering out traffic in analytics
 const INTERNAL_COOKIE = "is_hearst_cc_internal";
 // hiding newsletter modal
@@ -228,3 +228,5 @@ const OOS_TEXTS_SELECTOR = 'p[data-fs-text-stock="true"]';
     throw error;
   }
 }
+
+module.exports = { runSyntheticMonitor };
