@@ -228,3 +228,4 @@ const OOS_TEXTS_SELECTOR = 'p[data-fs-text-stock="true"]';
     throw error;
   }
 }
+module.exports = { runSyntheticMonitor };
