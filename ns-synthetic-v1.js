@@ -140,7 +140,7 @@ const OOS_TEXTS_SELECTOR = 'p[data-fs-text-stock="true"]';
         DefaultTimeout
       );
       logger.log(
-        4,
+        5,
         `incrementButtonincrementButtonn ${incrementButton}`, 
       );
       console.log("incrementButtonincrementButtonincrementButton", incrementButton)
