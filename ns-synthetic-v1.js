@@ -128,25 +128,6 @@ const OOS_TEXTS_SELECTOR = 'p[data-fs-text-stock="true"]';
       throw new Error(`Error checking OOS status`);
     }
 
-    // Click Increment Quantity Button
-    try {
-      logger.log(
-        4,
-        "Click Increment Quantity Button",
-        `journey-${SITE_CODE}-store`
-      );
-      const incrementButton = document.querySelector('[aria-label="Increment Quantity"]');
-      logger.log(
-        4,
-        `incrementButtonincrementButtonn ${incrementButton}`, 
-      );
-      console.log("incrementButtonincrementButtonincrementButton", incrementButton)
-      await incrementButton.click();
-      await new Promise((resolve) => setTimeout(resolve, ExtraTimeout));
-    } catch (err) {
-      $util.insights.set("severity", "P2");
-      throw new Error(`Unable to increase the quantity of the product`);
-    }
 
     // Add to Cart #1
     try {
