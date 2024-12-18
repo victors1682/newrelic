@@ -139,6 +139,11 @@ const OOS_TEXTS_SELECTOR = 'p[data-fs-text-stock="true"]';
         By.css('[aria-label="Increment Quantity"]'),
         DefaultTimeout
       );
+      logger.log(
+        4,
+        `incrementButtonincrementButtonn ${incrementButton}`, 
+      );
+      console.log("incrementButtonincrementButtonincrementButton", incrementButton)
       await incrementButton.click();
       await new Promise((resolve) => setTimeout(resolve, ExtraTimeout));
     } catch (err) {
@@ -228,4 +233,5 @@ const OOS_TEXTS_SELECTOR = 'p[data-fs-text-stock="true"]';
     throw error;
   }
 }
+
 module.exports = { runSyntheticMonitor };
